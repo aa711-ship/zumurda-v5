@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="زمردة — مكياجات واكسسوارات وهدايا مختارة بعناية.">
+  <title>زمردة | مكياجات، إكسسوارات وهدايا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="زمردة">
+      <span class="brand-mark">Z</span>
+      <span><strong>زمردة</strong><small>BEAUTY &amp; GIFT</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#shop">المتجر</a>
+      <a href="#finder">اختاري هديتك</a>
+      <a href="#about">عن زمردة</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="بحث">⌕</button>
+      <a class="header-cta" href="#shop">تسوّقي الآن</a>
+      <button class="menu-btn" id="menuBtn" aria-label="القائمة">☰</button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">لمسة صغيرة… تصنع ذكرى كبيرة</span>
+        <h1>هديتكِ<br><em>بطابع زمردة.</em></h1>
+        <p>مكياجات، إكسسوارات وبوكسات هدايا منتقاة بذوق أنيق، لتلاقي الشيء المناسب بدون حيرة.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#shop">اكتشفي المجموعة <span>←</span></a>
+          <a class="btn btn-ghost" href="#finder">دعينا نختار لكِ</a>
+        </div>
+        <div class="hero-note"><span>✦</span> توصيل إلى جميع الأراضي السورية</div>
+      </div>
+      <div class="hero-art reveal">
+        <div class="hero-card hero-card-main">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1100&q=85" alt="منتجات تجميل أنيقة" loading="eager">
+        </div>
+        <div class="floating-card floating-card-top">
+          <span>اختيارات</span><strong>تستاهل الهدية</strong>
+        </div>
+        <div class="floating-card floating-card-bottom">
+          <span>زمردة</span><strong>تفاصيل تحبّيها</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-strip section-shell">
+      <button class="category-pill active" data-category="all">الكل</button>
+      <button class="category-pill" data-category="makeup">مكياج</button>
+      <button class="category-pill" data-category="care">عناية</button>
+      <button class="category-pill" data-category="perfume">عطور</button>
+      <button class="category-pill" data-category="accessories">إكسسوارات</button>
+      <button class="category-pill" data-category="gifts">هدايا</button>
+      <button class="category-pill" data-category="boxes">بوكسات</button>
+      <button class="category-pill" data-category="offers">عروض</button>
+    </section>
+
+    <section class="products-section section-shell" id="shop">
+      <div class="section-heading reveal">
+        <div><span class="eyebrow">مختارات زمردة</span><h2>قطع تستحق أن تُهدى</h2></div>
+        <p>اختاري قطعة، املئي بياناتك، وراجعي الطلب قبل أن نفتح واتساب.</p>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+      <div class="empty-state hidden" id="emptyState">ما لقينا منتجات بهالتصنيف حالياً.</div>
+    </section>
+
+    <section class="finder-section section-shell" id="finder">
+      <div class="finder-panel reveal">
+        <div class="finder-intro">
+          <span class="eyebrow">GIFT FINDER</span>
+          <h2>خلّي زمردة<br><em>تختار عنكِ.</em></h2>
+          <p>ثلاث إجابات بسيطة، ونطلع لكِ باقتراحات قريبة من ذوقك وميزانيتك.</p>
+        </div>
+        <div class="finder-form">
+          <div class="finder-step">
+            <span>01</span><label>لمن الهدية؟</label>
+            <select id="finderRecipient">
+              <option value="all">اختاري</option><option value="mother">أم</option><option value="friend">صديقة</option>
+              <option value="sister">أخت</option><option value="fiance">زوجة / خطيبة</option><option value="special">شخص مميز</option>
+            </select>
+          </div>
+          <div class="finder-step">
+            <span>02</span><label>ما المناسبة؟</label>
+            <select id="finderOccasion">
+              <option value="all">اختاري</option><option value="birthday">عيد ميلاد</option><option value="anniversary">ذكرى</option>
+              <option value="graduation">تخرج</option><option value="visit">زيارة</option><option value="none">بدون مناسبة</option>
+            </select>
+          </div>
+          <div class="finder-step">
+            <span>03</span><label>ميزانيتك؟</label>
+            <select id="finderBudget">
+              <option value="all">اختاري</option><option value="low">اقتصادية</option><option value="medium">متوسطة</option><option value="premium">مميزة</option>
+            </select>
+          </div>
+          <button class="btn btn-dark" id="findGiftBtn">أعطني اقتراحاتي <span>✦</span></button>
+        </div>
+      </div>
+      <div class="finder-results hidden" id="finderResults">
+        <div class="section-heading compact"><div><span class="eyebrow">اقتراحاتك</span><h3>ثلاثة اختيارات من زمردة</h3></div></div>
+        <div class="products-grid finder-grid" id="finderGrid"></div>
+      </div>
+    </section>
+
+    <section class="about-section section-shell" id="about">
+      <div class="about-image reveal"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1000&q=85" alt="تفاصيل أنيقة من زمردة" loading="lazy"></div>
+      <div class="about-copy reveal">
+        <span class="eyebrow">WHY ZUMURDA</span>
+        <h2>لأن الهدية مو بس غرض.</h2>
+        <p>في زمردة نهتم بالاختيار، بالشكل، وبالتفاصيل التي تجعل الهدية تبدو وكأنها صُنعت خصيصاً للشخص الذي تحبينه.</p>
+        <div class="about-points"><div><b>01</b><span>اختيارات أنيقة</span></div><div><b>02</b><span>طلب سهل عبر واتساب</span></div><div><b>03</b><span>توصيل داخل سوريا</span></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top section-shell">
+      <div class="footer-brand"><span class="brand-mark">Z</span><h3>زمردة</h3><p>مكياجات • إكسسوارات • هدايا</p></div>
+      <div class="footer-links"><a href="#shop">المتجر</a><a href="#finder">اختاري هديتك</a><a href="#about">عن زمردة</a><a href="https://maps.app.goo.gl/abCj9zBpQTP4Ek7G8" target="_blank" rel="noopener">موقعنا</a></div>
+      <div class="footer-social"><a href="https://www.instagram.com/zumurruda.2006?igsi=MXdsc3Fpbmc0bW94cg==" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@zumrda_2006?_r=1&_t=ZS-99Jb5FJgEfl" target="_blank" rel="noopener">TikTok</a><a href="https://wa.me/963986056357" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+   <div class="footer-bottom section-shell">
+    <span>© 2026 زمردة. جميع الحقوق محفوظة.</span>
+    </div>
+</footer>
+
+  <div class="modal-backdrop hidden" id="searchModal">
+    <div class="modal search-modal"><button class="modal-close" data-close="searchModal">×</button><span class="eyebrow">SEARCH</span><h3>ابحثي عن منتج</h3><input id="searchInput" type="search" placeholder="مثلاً: عطر، بوكس، روج…"><div id="searchResults" class="search-results"></div></div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="orderModal">
+    <div class="modal order-modal">
+      <button class="modal-close" data-close="orderModal">×</button>
+      <div class="order-progress"><span class="active">1</span><i></i><span>2</span></div>
+      <div id="orderFormStep">
+        <span class="eyebrow">ORDER DETAILS</span><h3>خلّينا نجهز طلبك</h3>
+        <div class="selected-product" id="selectedProduct"></div>
+        <form id="orderForm">
+          <div class="form-grid">
+            <label>الاسم الكامل*<input name="name" required autocomplete="name"></label>
+            <label>رقم الهاتف*<input name="phone" required type="tel" autocomplete="tel"></label>
+            <label>المنطقة / المدينة*<input name="area" required></label>
+            <label class="full">الموقع / العنوان بالتفصيل*<textarea name="address" required rows="2"></textarea></label>
+            <label>الكمية*<input name="quantity" required type="number" min="1" value="1"></label>
+            <label>ملاحظات (اختياري)<input name="notes"></label>
+          </div>
+          <button type="button" class="location-btn" id="locationBtn">⌖ استخدمي موقعي الحالي</button>
+          <p class="location-status" id="locationStatus"></p>
+          <button class="btn btn-primary wide" type="submit">مراجعة الطلب <span>←</span></button>
+        </form>
+      </div>
+      <div id="reviewStep" class="hidden">
+        <span class="eyebrow">FINAL REVIEW</span><h3>راجعي طلبك قبل الإرسال</h3>
+        <div id="reviewBox" class="review-box"></div>
+        <div class="review-actions"><button class="btn btn-ghost" id="backToForm">تعديل البيانات</button><button class="btn btn-dark" id="sendWhatsApp">تأكيد وفتح واتساب <span>↗</span></button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
