@@ -18,7 +18,7 @@
 
   <header class="site-header">
     <a class="brand" href="#home" aria-label="زمردة">
-      <span class="brand-mark">Z</span>
+      <img class="brand-mark" src="assets/IMG-20260902-WA0031.jpg" alt="شعار زمردة">
       <span><strong>زمردة</strong><small>BEAUTY &amp; GIFT</small></span>
     </a>
     <nav class="main-nav" id="mainNav">
@@ -67,6 +67,8 @@
       <button class="category-pill" data-category="gifts">هدايا</button>
       <button class="category-pill" data-category="boxes">بوكسات</button>
       <button class="category-pill" data-category="offers">عروض</button>
+      <button class="category-pill" data-category="weddings">أعراس</button>
+      <button class="category-pill" data-category="parties">حفلات</button>
     </section>
 
     <section class="products-section section-shell" id="shop">
@@ -75,9 +77,8 @@
         <p>اختاري قطعة، املئي بياناتك، وراجعي الطلب قبل أن نفتح واتساب.</p>
       </div>
       <div class="products-grid" id="productsGrid"></div>
-      <div class="empty-state hidden" id="emptyState">ما لقينا منتجات بهالتصنيف حالياً.</div>
+    <div class="empty-state hidden" id="emptyState">لم يتم العثور على منتج بهذا التصنيف حاليا.</div>
     </section>
-
     <section class="finder-section section-shell" id="finder">
       <div class="finder-panel reveal">
         <div class="finder-intro">
@@ -116,7 +117,9 @@
     </section>
 
     <section class="about-section section-shell" id="about">
-      <div class="about-image reveal"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=1000&q=85" alt="تفاصيل أنيقة من زمردة" loading="lazy"></div>
+    <div class="about-image reveal">
+    <img src="https://images.pexels.com/photos/31449823/pexels-photo-31449823.jpeg" alt="تفاصيل أنيقة من زمردة" loading="lazy">
+    </div>
       <div class="about-copy reveal">
         <span class="eyebrow">WHY ZUMURDA</span>
         <h2>لأن الهدية مو بس غرض.</h2>
@@ -128,7 +131,7 @@
 
   <footer class="site-footer">
     <div class="footer-top section-shell">
-      <div class="footer-brand"><span class="brand-mark">Z</span><h3>زمردة</h3><p>مكياجات • إكسسوارات • هدايا</p></div>
+      <div class="footer-brand"><img class="brand-mark" src="assets/IMG-20260902-WA0031.jpg" alt="شعار زمردة"><h3>زمردة</h3><p>مكياجات • إكسسوارات • هدايا</p></div>
       <div class="footer-links"><a href="#shop">المتجر</a><a href="#finder">اختاري هديتك</a><a href="#about">عن زمردة</a><a href="https://maps.app.goo.gl/abCj9zBpQTP4Ek7G8" target="_blank" rel="noopener">موقعنا</a></div>
       <div class="footer-social"><a href="https://www.instagram.com/zumurruda.2006?igsi=MXdsc3Fpbmc0bW94cg==" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@zumrda_2006?_r=1&_t=ZS-99Jb5FJgEfl" target="_blank" rel="noopener">TikTok</a><a href="https://wa.me/963986056357" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
@@ -171,7 +174,7 @@
   </div>
 
   <div class="toast" id="toast"></div>
-  <script src="js/products.js"></script>
-  <script src="js/app.js"></script>
-</body>
-</html>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/products.js"></script>
+<script src="js/app.js"></script>

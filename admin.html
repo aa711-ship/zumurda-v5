@@ -1,24 +1,365 @@
 <!doctype html>
+
 <html lang="ar" dir="rtl">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>زمردة | لوحة الإدارة</title><link rel="stylesheet" href="css/admin.css"></head>
-<body>
-<header class="admin-head"><a href="index.html">← العودة للمتجر</a><div><b>زمردة</b><small>لوحة إدارة المنتجات</small></div></header>
-<main class="admin-shell">
-<section class="admin-intro"><div><span>LOCAL ADMIN</span><h1>إدارة المنتجات</h1><p>هذه لوحة تجريبية تعتمد على LocalStorage في نفس المتصفح. ليست نظام إدارة مؤمّناً للإنتاج.</p></div><div class="stats"><strong id="productCount">0</strong><span>منتج</span></div></section>
-<section class="admin-grid">
-<div class="panel">
-<h2 id="formTitle">إضافة منتج</h2>
-<form id="productForm">
-<input type="hidden" name="id">
-<label>اسم المنتج<input name="name" required></label>
-<div class="two"><label>التصنيف<select name="category"><option value="makeup">مكياج</option><option value="care">عناية</option><option value="perfume">عطور</option><option value="accessories">إكسسوارات</option><option value="gifts">هدايا</option><option value="boxes">بوكسات</option><option value="offers">عروض</option></select></label><label>السعر<input name="price" type="number" min="0" required></label></div>
-<label>رابط الصورة<input name="image" type="url" required></label>
-<label>الشارة<input name="tag" placeholder="جديد / الأكثر طلباً"></label>
-<div class="two"><label>الميزانية<select name="budget"><option value="low">اقتصادية</option><option value="medium">متوسطة</option><option value="premium">مميزة</option></select></label><label>المعرّف الإنجليزي<input name="id" id="idInput" placeholder="rose-box"></label></div>
-<div class="actions"><button class="primary" type="submit">حفظ المنتج</button><button type="button" id="cancelEdit">إلغاء</button></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>زمردة | لوحة الإدارة</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head><body><div id="loginScreen" class="login-screen">
+  <div class="login-box"><img
+  class="login-mark"
+  src="assets/IMG-20260902-WA0031.jpg"
+  alt="شعار زمردة"
+>
+
+<h1>زمردة</h1>
+<p>تسجيل الدخول إلى لوحة الإدارة</p>
+
+<form id="loginForm">
+
+  <label>
+    البريد الإلكتروني
+    <input
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+    >
+  </label>
+
+  <label>
+    كلمة المرور
+    <input
+      type="password"
+      name="password"
+      required
+      autocomplete="current-password"
+    >
+  </label>
+
+  <button type="submit" class="primary login-btn">
+    تسجيل الدخول
+  </button>
+
+  <p id="loginMessage" class="login-message"></p>
+
 </form>
+
+  </div>
+</div><div id="adminContent" class="admin-content hidden">  <header class="admin-head"><button id="logoutBtn" class="logout-btn" type="button">
+  تسجيل الخروج
+</button>
+
+<a href="index.html">← العودة للمتجر</a>
+
+<div>
+  <b>زمردة</b>
+  <small>لوحة إدارة المنتجات</small>
 </div>
-<div class="panel"><div class="panel-title"><h2>المنتجات الحالية</h2><button id="restoreBtn">استعادة التجريبي</button></div><div id="adminProducts"></div></div>
+
+  </header>  <main class="admin-shell"><section class="admin-grid">
+
+
+  <!-- نموذج المنتج -->
+
+  <div class="panel">
+
+    <h2 id="formTitle">إضافة منتج</h2>
+
+    <form id="productForm">
+
+      <label>
+        اسم المنتج
+        <input name="name" required>
+      </label>
+
+
+      <div class="two">
+
+        <label>
+          التصنيف
+
+          <select name="category">
+            <option value="makeup">مكياج</option>
+            <option value="care">عناية</option>
+            <option value="perfume">عطور</option>
+            <option value="accessories">إكسسوارات</option>
+            <option value="gifts">هدايا</option>
+            <option value="boxes">بوكسات</option>
+            <option value="offers">عروض</option>
+            <option value="weddings">أعراس</option>
+            <option value="parties">حفلات</option>
+          </select>
+
+        </label>
+
+
+        <label>
+          السعر
+
+          <input
+            name="price"
+            type="number"
+            min="0"
+            required
+          >
+
+        </label>
+
+      </div>
+
+
+      <div class="two">
+
+        <label>
+          السعر القديم
+          <input
+            name="old_price"
+            type="number"
+            min="0"
+            placeholder="اختياري"
+          >
+        </label>
+
+
+        <label>
+          المخزون
+
+          <input
+            name="stock"
+            type="number"
+            min="0"
+            value="0"
+          >
+
+        </label>
+
+      </div>
+
+
+      <label>
+        وصف المنتج
+
+        <textarea
+          name="description"
+          rows="4"
+          placeholder="اكتبي وصفاً مختصراً وجذاباً للمنتج..."
+        ></textarea>
+
+      </label>
+
+
+      <label>
+        صورة المنتج
+
+        <input
+          name="image"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          required
+        >
+
+        <small>
+          اختر صورة من جهازك — JPG أو PNG أو WebP
+        </small>
+
+      </label>
+
+
+      <label>
+        الشارة
+
+        <input
+          name="tag"
+          placeholder="جديد / الأكثر طلباً"
+        >
+
+      </label>
+
+
+      <div class="two">
+
+        <label>
+          الميزانية
+
+          <select name="budget">
+            <option value="low">اقتصادية</option>
+            <option value="medium">متوسطة</option>
+            <option value="premium">مميزة</option>
+          </select>
+
+        </label>
+
+
+        <label>
+          منتج مميز
+
+          <select name="featured">
+            <option value="false">لا</option>
+            <option value="true">نعم ⭐</option>
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <strong>لمن يناسب المنتج؟</strong>
+
+        <div class="check-grid">
+
+          <label>
+            <input
+              type="checkbox"
+              name="recipients"
+              value="mother"
+            >
+            أم
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="recipients"
+              value="friend"
+            >
+            صديقة
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="recipients"
+              value="sister"
+            >
+            أخت
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="recipients"
+              value="fiance"
+            >
+            زوجة / خطيبة
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="recipients"
+              value="special"
+            >
+            شخص مميز
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <strong>المناسبات</strong>
+
+        <div class="check-grid">
+
+          <label>
+            <input
+              type="checkbox"
+              name="occasions"
+              value="birthday"
+            >
+            عيد ميلاد
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="occasions"
+              value="anniversary"
+            >
+            ذكرى
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="occasions"
+              value="graduation"
+            >
+            تخرج
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="occasions"
+              value="visit"
+            >
+            زيارة
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="occasions"
+              value="none"
+            >
+            بدون مناسبة
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="primary"
+          type="submit"
+        >
+          حفظ المنتج
+        </button>
+
+        <button
+          type="button"
+          id="cancelEdit"
+        >
+          إلغاء
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- المنتجات الحالية -->
+
+  <div class="panel">
+
+    <div class="panel-title">
+
+      <h2>المنتجات الحالية</h2>
+
+      <span>
+        <b id="productCount">0</b>
+      </span>
+
+    </div>
+
+    <div id="adminProducts"></div>
+
+  </div>
+
+
 </section>
-</main><script src="js/products.js"></script><script src="js/admin.js"></script>
-</body></html>
+
+  </main></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase.js"></script><script src="js/products.js"></script><script src="js/admin.js"></script></body>
+</html>
