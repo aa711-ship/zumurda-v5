@@ -10,6 +10,25 @@ const logoutBtn = document.querySelector("#logoutBtn");
 let list = [];
 let editingId = null;
 
+function showToast(title, text) {
+  const toast = document.querySelector("#toast");
+
+  if (!toast) {
+    return;
+  }
+
+  toast.innerHTML = `
+    <span class="toast-title">${title}</span>
+    <span class="toast-text">${text}</span>
+  `;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
 async function showAdminSession() {
   const { data, error } = await db.auth.getSession();
 
@@ -149,14 +168,20 @@ function render() {
         <div>
           <strong>${p.name || ""}</strong>
 
-          <small>
-            ${label(p.category)} • ${money(p.price || 0)}
-            ${
-              p.old_price
-                ? ` • السعر القديم: ${money(p.old_price)}`
-                : ""
-            }
-          </small>
+         
+         <small>
+          ${label(p.category)} • ${money(p.price || 0)}
+        ${
+          p.price_usd
+       ? ` • $${Number(p.price_usd).toFixed(2)}`
+      : ""
+          }
+           ${
+            p.old_price
+        ? ` • السعر القديم: ${money(p.old_price)}`
+      : ""
+          }
+         </small>
 
           ${
             p.featured
@@ -294,6 +319,10 @@ document
       formData.get("price") || 0
     );
 
+    const price_usd = Number(
+      formData.get("price_usd") || 0
+    );
+
     const oldPriceValue = String(
       formData.get("old_price") || ""
     ).trim();
@@ -345,6 +374,10 @@ document
       alert("أدخل سعراً صحيحاً.");
       return;
     }
+    if (price_usd < 0 || Number.isNaN(price_usd)) {
+      alert("أدخل سعر الدولار بشكل صحيح.");
+      return;
+    }
 
     if (
       old_price !== null &&
@@ -392,6 +425,7 @@ document
         name,
         category,
         price,
+        price_usd,
         old_price,
         description,
         tag,
@@ -421,7 +455,10 @@ document
           throw new Error(error.message);
         }
 
-        alert("تم تعديل المنتج بنجاح.");
+        showToast(
+  "تم التعديل بنجاح",
+  "تم تحديث بيانات المنتج."
+);;
       } else {
         const { error } = await db
           .from("products")
@@ -431,7 +468,10 @@ document
           throw new Error(error.message);
         }
 
-        alert("تمت إضافة المنتج بنجاح.");
+        showToast(
+  "تمت الإضافة بنجاح",
+  "تم حفظ المنتج في المتجر."
+);
       }
 
       resetForm();
@@ -488,6 +528,9 @@ document
 
       form.querySelector('[name="price"]').value =
         product.price ?? "";
+
+      form.querySelector('[name="price_usd"]').value =
+        product.price_usd ?? "";
 
       form.querySelector('[name="old_price"]').value =
         product.old_price ?? "";
@@ -562,40 +605,70 @@ document
 
     if (deleteButton) {
 
-      const id =
-        deleteButton.dataset.delete;
+  const id =
+    deleteButton.dataset.delete;
 
-      const confirmed = confirm(
-        "هل تريد حذف هذا المنتج نهائياً؟"
+  const deleteModal =
+    document.querySelector("#deleteModal");
+
+  const cancelDelete =
+    document.querySelector("#cancelDelete");
+
+  const confirmDelete =
+    document.querySelector("#confirmDelete");
+
+  if (!deleteModal || !cancelDelete || !confirmDelete) {
+    return;
+  }
+
+  deleteModal.classList.add("show");
+
+  const closeModal = () => {
+    deleteModal.classList.remove("show");
+  };
+
+  cancelDelete.onclick = () => {
+    closeModal();
+  };
+
+  confirmDelete.onclick = async () => {
+
+    confirmDelete.disabled = true;
+    confirmDelete.textContent = "جارٍ الحذف...";
+
+    const { error } = await db
+      .from("products")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+
+      alert(
+        "تعذر حذف المنتج:\n" +
+        error.message
       );
 
-      if (!confirmed) {
-        return;
-      }
+      confirmDelete.disabled = false;
+      confirmDelete.textContent = "حذف المنتج";
 
-      deleteButton.disabled = true;
-
-      const { error } = await db
-        .from("products")
-        .delete()
-        .eq("id", id);
-
-      if (error) {
-
-        alert(
-          "تعذر حذف المنتج:\n" +
-          error.message
-        );
-
-        deleteButton.disabled = false;
-
-        return;
-      }
-
-      await loadProducts();
+      return;
     }
-  });
 
+    closeModal();
+
+    confirmDelete.disabled = false;
+    confirmDelete.textContent = "حذف المنتج";
+
+    showToast(
+      "تم الحذف بنجاح",
+      "تم حذف المنتج من المتجر."
+    );
+
+    await loadProducts();
+  };
+}
+
+});
 
 document
   .querySelector("#cancelEdit")

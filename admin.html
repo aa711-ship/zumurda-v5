@@ -108,7 +108,16 @@
         </label>
 
       </div>
-
+         <label>
+          السعر بالدولار
+          <input
+          name="price_usd"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="مثال: 12.50"
+          >
+        </label>
 
       <div class="two">
 
@@ -361,5 +370,25 @@
 
 </section>
 
-  </main></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase.js"></script><script src="js/products.js"></script><script src="js/admin.js"></script></body>
+  </main></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase.js"></script><script src="js/products.js"></script><script src="js/admin.js"></script><div id="toast" class="toast"></div><div id="deleteModal" class="delete-modal">
+  <div class="delete-box">
+
+    <div class="delete-icon">!</div>
+
+    <h3>تأكيد الحذف</h3>
+
+    <p>هل تريد حذف هذا المنتج نهائياً؟</p>
+
+    <div class="delete-actions">
+      <button type="button" id="cancelDelete">
+        إلغاء
+      </button>
+
+      <button type="button" id="confirmDelete">
+        حذف المنتج
+      </button>
+    </div>
+
+  </div>
+</div></body>
 </html>
